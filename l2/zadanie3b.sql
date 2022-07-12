@@ -1,0 +1,42 @@
+USE tempdb 
+GO
+
+IF OBJECT_ID('P') IS NOT NULL
+    DROP TABLE P;
+GO
+CREATE TABLE P(
+    g int NOT NULL,
+    m int NOT NULL,
+    co2 float NOT NULL,
+    counter_v int NOT NULL
+);
+INSERT INTO P VALUES(8, 10, 0.6, 96);
+INSERT INTO P VALUES(9, 20, 0.3, 420);
+INSERT INTO P VALUES(7, 30, 0.1, 2137);
+INSERT INTO P VALUES(9, 40, 0.2, 1337);
+INSERT INTO P VALUES(8, 50, 0.8, 27);
+INSERT INTO P VALUES(10, 55, 0.9, 2002);
+INSERT INTO P VALUES(7, 50, 0.8, 29);
+INSERT INTO P VALUES(7, 55, 0.9, 2004);
+GO
+SELECT * FROM P
+PIVOT (MIN(co2) FOR g IN ([7], [8], [9], [10])) AS a
+ORDER BY m;
+SELECT * FROM P
+PIVOT (SUM(co2) FOR g IN ([7], [8], [9], [10])) AS a
+ORDER BY m;
+SELECT * FROM P
+PIVOT (MAX(co2) FOR g IN ([7], [8], [9], [10])) AS a
+ORDER BY m;
+
+SELECT * FROM P
+PIVOT (MIN(counter_v) FOR g IN ([7], [8], [9], [10])) AS a
+ORDER BY m;
+SELECT * FROM P
+PIVOT (MAX(counter_v) FOR g IN ([7], [8], [9], [10])) AS a
+ORDER BY m;
+SELECT * FROM P
+PIVOT (SUM(counter_v) FOR g IN ([7], [8], [9], [10])) AS a
+ORDER BY m;
+
+

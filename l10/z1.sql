@@ -1,0 +1,18 @@
+USE testCLR;
+GO
+
+CREATE TABLE Eventlog (
+	id INT IDENTITY PRIMARY KEY,
+	date_i DATETIME NOT NULL DEFAULT (getDate()),
+    input VARCHAR(27) NOT NULL,
+	username VARCHAR(27) NOT NULL,
+	
+);
+CREATE TABLE test1 (
+	num int
+);
+
+INSERT INTO test1 VALUES(27);
+
+SELECT * FROM test1;
+SELECT * FROM Eventlog;
